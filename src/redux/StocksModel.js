@@ -7,7 +7,8 @@ import { GetCompanyCandle } from "../services/stocksAPI";
 const StocksModel = {
     marketInfo: [],
     filters: {
-        endDate: '2021-01-31', startDate: '2021-01-01'
+        endDate: '2021-01-31',
+        startDate: '2021-01-01',
     },
     loading: false,
     selectedStocks: {},
@@ -35,20 +36,29 @@ const StocksModel = {
         const { symbol, start, end } = payload;
         const candle = await GetCompanyCandle(symbol, start, end);
 
-        console.log('Symbol: ', symbol); // TODO: REMOVE CONSOLE
-        console.log('Candle: ', candle); // TODO: REMOVE CONSOLE
-
         actions.HandleSetGraphInfo({ symbol, candle });
     }),
     HandleSetGraphInfo: action((state, value) => {
         const { symbol, candle } = value;
-
-        if (state.graphInfo[symbol]) {
-            delete state.graphInfo[symbol];
-        } else {
-            state.graphInfo[symbol] = candle;
+        const transformData = data => {
+            if (data && data.c && data.o) {
+                return data.c.map((item, index) => ({
+                    close: Number(item).toFixed(2),
+                    open: Number(data.o[index]).toFixed(2),
+                    high: Number(data.h[index]).toFixed(2),
+                    low: Number(data.l[index]).toFixed(2),
+                    timestamp: new Date(data.t[index] * 1000).toLocaleDateString()
+                }))
+            }
         }
+        // Parse Values to be shown
+        const parseCandle = transformData(candle);
+
+        state.graphInfo[symbol] = parseCandle;
     }),
+    HandleClearGraphInfo: action((state, value) => {
+        delete state.graphInfo[value];
+    })
 }
 
 

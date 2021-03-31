@@ -23,7 +23,8 @@ export default function Filters() {
     const loading = useStoreState((state) => state.StocksModel.loading);
     const setLoading = useStoreActions((actions) => actions.StocksModel.HandleSetLoading);
     const loadGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleLoadSelectedPropertiesData);
-    const setGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleSetGraphInfo);
+    const clearGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleClearGraphInfo);
+    const graphInfo = useStoreState((state) => state.StocksModel.graphInfo);
 
     useEffect(() => {
         setLoading(true);
@@ -32,6 +33,7 @@ export default function Filters() {
         GetStocksUSDetails()
             .then((response) => {
                 if (response) {
+                    // Reduce the amount of results to only a few
                     if (response.length > 10) {
                         setMarketInfo(response.slice(0, 10))
                     } else {
@@ -41,27 +43,42 @@ export default function Filters() {
             })
             .catch(err => console.error(err))
             .finally(() => setLoading(false));
-
-        setLoading(false);
     }, []);
+
+    useEffect(() => {
+        update();
+    }, [filters]);
+
+    const update = () => {
+        if (graphInfo) {
+            // eslint-disable-next-line array-callback-return
+            Object.keys(graphInfo).map(key => {
+                const s = marketInfo.find(item => item.symbol === key);
+
+                handleCheckChange(s, false, false);
+            });
+        }
+    };
 
     const handleStartDateChange = ({ target: { value } }) => setFilters({ ...filters, startDate: value });
 
     const handleEndDateChange = ({ target: { value } }) => setFilters({ ...filters, endDate: value });
 
-    const handleCheckChange = (data, isSelected) => {
+    const handleCheckChange = (data, isSelected, mustUpdate = true) => {
         const parseDate = date => Math.round((new Date(date)).getTime() / 1000);
         const end = parseDate(filters.endDate);
         const start = parseDate(filters.startDate);
 
         if (data) {
-            setStock(data);
+            if (mustUpdate) {
+                setStock(data);
+            }
 
             if (!isSelected) {
                 // Get information for the graph
                 loadGraphInfo({ symbol: data.symbol, start, end });
             } else {
-                setGraphInfo({ symbol: data.symbol, candle: {} });
+                clearGraphInfo(data.symbol);
             }
         }
     };
@@ -71,7 +88,7 @@ export default function Filters() {
             <h1 className='App-stocks-title'>Select up to three (3) stocks to check it's Time Series</h1>
 
             {loading
-                ? 'Loading Stocks Information...'
+                ? <div>Loading Stocks Information...</div>
                 : <div className='App-stocks-selection'>
                     <div className='stocks-selection'>
                         {marketInfo.length !== 0
