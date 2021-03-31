@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+// Dependencias
+import { createStore, StoreProvider } from 'easy-peasy';
+import React from 'react';
+
+// Components
+import Filters from "./components/Filters/Filters";
+import Graph from "./components/Graph/Graph";
+import Header from "./components/Header/Header";
+
+// Styles
 import './App.css';
 
+// Utilities
+import Stores from "./redux/Stores";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <StoreProvider store={createStore(Stores)}>
+            <div className="App">
+                <Header/>
+
+                <Filters />
+
+                <Graph />
+            </div>
+        </StoreProvider>
+    );
 }
 
 export default App;
