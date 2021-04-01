@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+# Shroders React Test
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Use
 
-In the project directory, run the following to install dependencies:
+In the project directory, run the following to install dependencies and be able to run the project:
 
 ## `yarn` or `npm install`
 
