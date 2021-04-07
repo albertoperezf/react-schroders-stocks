@@ -13,6 +13,11 @@ import './App.css';
 // Utilities
 import Stores from "./redux/Stores";
 
+/**
+ * App - Main component of the application
+ * @return {*}
+ * @constructor
+ */
 function App() {
     return (
         <StoreProvider store={createStore(Stores)}>

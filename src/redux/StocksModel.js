@@ -8,6 +8,7 @@ const StocksModel = {
     marketInfo: [],
     filters: {
         endDate: '2021-01-31',
+        search: '',
         startDate: '2021-01-01',
     },
     loading: false,
