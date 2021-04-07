@@ -28,15 +28,15 @@
 
 .App-stocks-selection {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
 }
 
 .stocks-selection {
-  width: 60%;
   display: flex;
   flex-direction: row;
   overflow: scroll;
+  margin: 0 1em;
 }
 
 .stock-details {
@@ -58,7 +58,7 @@
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   justify-content: center;
-  min-height: 70vh;
+  min-height: 60vh;
 }
 
 .date-selection {
