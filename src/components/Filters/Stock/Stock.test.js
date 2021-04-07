@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 // Components
 import Stock from "./Stock";
@@ -21,8 +21,11 @@ describe('Stock Component', () => {
     test('renders the Stock component', () => {
         render(renderStock(false, false));
         expect(screen.getByRole('document')).toBeInTheDocument();
-        expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
+        expect(screen.getByRole('checkbox')).toBeInTheDocument();
+        expect(screen.getByRole('checkbox')).not.toBeChecked();
+        fireEvent.change(screen.getByRole('checkbox'), { target: { checked: true } });
+        expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     test('renders the Stock component disabled', () => {
@@ -36,8 +39,10 @@ describe('Stock Component', () => {
     test('renders the Stock component when is selected', () => {
         render(renderStock(false, true));
         expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByRole('paragraph')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeChecked();
-        expect(screen.getByRole('paragraph')).toBeInTheDocument();
+        fireEvent.change(screen.getByRole('checkbox'), { target: { checked: false } });
+        expect(screen.getByRole('checkbox')).not.toBeChecked();
     });
 });

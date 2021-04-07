@@ -22,9 +22,6 @@ export default function Graph() {
         setLegendFilters({ ...legendFilters, [parse]: !legendFilters[parse] })
     };
 
-    console.log('------------------------------------', ); // TODO: REMOVE CONSOLE
-    console.log('Info: ', graphInfo); // TODO: REMOVE CONSOLE
-
     return loading
         ? 'Loading Stock Graph...'
         : <div className="App-graph">
