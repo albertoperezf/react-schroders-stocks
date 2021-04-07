@@ -1,4 +1,6 @@
-# Shroders React Test
+![Shroders React Project](./public/Capture.png)
+
+# Shroders React Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

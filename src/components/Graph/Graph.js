@@ -22,10 +22,16 @@ export default function Graph() {
         setLegendFilters({ ...legendFilters, [parse]: !legendFilters[parse] })
     };
 
+    console.log('------------------------------------', ); // TODO: REMOVE CONSOLE
+    console.log('Info: ', graphInfo); // TODO: REMOVE CONSOLE
+
     return loading
         ? 'Loading Stock Graph...'
         : <div className="App-graph">
-            {hasSelected.length === 0 && <p>Select a Stock to display the Graph</p>}
+            {hasSelected.length === 0
+                ? <p>Select a Stock to display the Graph</p>
+                : <p>Currently Selected: {hasSelected.toString()}</p>
+            }
 
             {hasSelected.length > 0 &&
                 <LineChart width={width} height={500} data={graphInfo[hasSelected[0]]} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
