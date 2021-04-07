@@ -34,8 +34,8 @@ export default function Filters() {
             .then((response) => {
                 if (response) {
                     // Reduce the amount of results to only a few
-                    if (response.length > 100) {
-                        setMarketInfo(response.slice(0, 100))
+                    if (response.length > 1000) {
+                        setMarketInfo(response.slice(0, 1000));
                     } else {
                         setMarketInfo(response);
                     }
