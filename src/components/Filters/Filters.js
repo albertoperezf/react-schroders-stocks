@@ -123,7 +123,7 @@ export default function Filters() {
     };
 
     return (
-        <div className='App-stocks'>
+        <div className='App-stocks' role='document'>
             <h2 className='App-stocks-title'>Select up to 3 stocks to check it's Time Series (Scroll to see more)</h2>
 
             {loading

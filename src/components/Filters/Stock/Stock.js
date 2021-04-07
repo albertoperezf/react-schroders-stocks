@@ -18,7 +18,7 @@ export default function Stock({ data, disabled, onChange, isSelected }) {
         }
     };
 
-    return <div className='stock-details' key={data.symbol}>
+    return <div role='document' className='stock-details' key={data.symbol}>
         <p role='paragraph'>{data.symbol}</p>
 
         <input disabled={disabled} id='select' checked={isSelected} onChange={handleChange} type="checkbox" value={isSelected} />

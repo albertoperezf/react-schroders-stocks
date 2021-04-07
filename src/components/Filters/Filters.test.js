@@ -9,8 +9,14 @@ import Filters from "./Filters";
 
 const store = createStore(Stores);
 
-it('renders without crashing', () => {
-    render(<StoreProvider store={store}><Filters /></StoreProvider>);
-    //
-    // screen.debug();
+describe('Filters Component', () => {
+    test('renders without crashing', async () => {
+        render(<StoreProvider store={store}><Filters /></StoreProvider>);
+
+        expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByRole('heading')).toBeInTheDocument();
+        expect(screen.getByText(/Loading Stocks Information.../)).toBeInTheDocument();
+
+        // expect(await screen.findByText(/Signed in as/)).toBeInTheDocument();
+    });
 });

@@ -20,12 +20,14 @@ describe('Stock Component', () => {
 
     test('renders the Stock component', () => {
         render(renderStock(false, false));
+        expect(screen.getByRole('document')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
     });
 
     test('renders the Stock component disabled', () => {
         render(renderStock(true, false));
+        expect(screen.getByRole('document')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeDisabled();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
@@ -33,6 +35,7 @@ describe('Stock Component', () => {
 
     test('renders the Stock component when is selected', () => {
         render(renderStock(false, true));
+        expect(screen.getByRole('document')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeChecked();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
