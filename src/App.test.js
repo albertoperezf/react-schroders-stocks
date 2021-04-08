@@ -1,6 +1,6 @@
 // Dependencies
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 // Components
 import App from './App';
@@ -8,5 +8,7 @@ import App from './App';
 describe('App Component', () => {
   test('renders without crashing', () => {
     render(<App />);
+
+    expect(screen.queryByText('heading')).toBeNull();
   });
 });

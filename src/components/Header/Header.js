@@ -7,7 +7,7 @@ import React from "react";
  * @constructor
  */
 export default function Header() {
-    return <header className="App-header">
+    return <header className="App-header" role='heading'>
         React Stock Market
     </header>;
 }

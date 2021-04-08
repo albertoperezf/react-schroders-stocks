@@ -155,7 +155,7 @@ export default function Filters() {
                     <div className='date-selection'>
                         <label className='date-label' htmlFor="start">
                             Search Stock:
-                            <input id='search' onChange={handleSearchChange} placeholder='Search by Symbol or Company' type="search" value={filters.search}/>
+                            <input id='search' onChange={handleSearchChange} placeholder='by Symbol or Company' type="search" value={filters.search}/>
                         </label>
 
                         <label className='date-label' htmlFor="start">
