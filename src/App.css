@@ -24,6 +24,7 @@
 
 .App-stocks-title {
   font-size: calc(14px + 2vmin);
+  margin: 1em;
 }
 
 .App-stocks-selection {
@@ -35,14 +36,14 @@
 .stocks-selection {
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   margin: 0 1em;
 }
 
 .stock-details {
   display: flex;
   flex-direction: row;
-  /*width: 54%;*/
   align-items: center;
   justify-content: center;
   padding: 10px;
