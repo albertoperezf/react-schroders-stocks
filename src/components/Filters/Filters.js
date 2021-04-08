@@ -15,38 +15,36 @@ import { GetStocksUSDetails } from "../../services/stocksAPI";
  */
 export default function Filters() {
     const selected = useStoreState((state) => state.StocksModel.selectedStocks);
-    const setStock = useStoreActions((actions) => actions.StocksModel.HandleSetSelectedStock);
+    const setSelected = useStoreActions((actions) => actions.StocksModel.HandleSetSelectedStock);
     const marketInfo = useStoreState((state) => state.StocksModel.marketInfo);
     const setMarketInfo = useStoreActions((actions) => actions.StocksModel.HandleSetMarketInfo);
     const filters = useStoreState((state) => state.StocksModel.filters);
     const setFilters = useStoreActions((actions) => actions.StocksModel.HandleSetFilter);
-    const loading = useStoreState((state) => state.StocksModel.loading);
-    const setLoading = useStoreActions((actions) => actions.StocksModel.HandleSetLoading);
-    const loadGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleLoadSelectedPropertiesData);
-    const clearGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleClearGraphInfo);
     const graphInfo = useStoreState((state) => state.StocksModel.graphInfo);
+    const clearGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleClearGraphInfo);
+    const loadGraphInfo = useStoreActions((actions) => actions.StocksModel.HandleLoadSelectedPropertiesData);
 
     useEffect(() => {
-        setLoading(true);
-
-        // When the app mount, get the information for stocks of the US Market
-        GetStocksUSDetails()
-            .then((response) => {
-                if (response) {
-                    // Reduce the amount of results to only a few
-                    if (response.length > 1000) {
-                        setMarketInfo(response.slice(0, 1000));
-                    } else {
-                        setMarketInfo(response);
+        // When the app mount, get the information for stocks of the US Market if we don't have one yet
+        if (!marketInfo) {
+            GetStocksUSDetails()
+                .then((response) => {
+                    if (response) {
+                        // Reduce the amount of results to only a few
+                        if (response.length > 1000) {
+                            setMarketInfo(response.slice(0, 1000));
+                        } else {
+                            setMarketInfo(response);
+                        }
                     }
-                }
-            })
-            .catch(err => console.error(err))
-            .finally(() => setLoading(false));
+                })
+                .catch(err => console.error(err));
+        }
 
-        return () => {
-            setMarketInfo([]);
-        };
+        // return () => {
+        //     console.log('clear'); // TODO: REMOVE CONSOLE
+        //     setMarketInfo([]);
+        // };
     }, []);
 
     useEffect(() => {
@@ -98,7 +96,7 @@ export default function Filters() {
 
         if (data) {
             if (mustUpdate) {
-                setStock(data);
+                setSelected(data);
             }
 
             if (!isSelected) {
@@ -108,6 +106,21 @@ export default function Filters() {
                 clearGraphInfo(data.symbol);
             }
         }
+    };
+
+    /**
+     * Handle the cleaning of the information on the Filters and the Graph
+     * @return {*}
+     */
+    const handleClear = () => {
+        // Reset filters to original state
+        setFilters({ endDate: '2021-01-31', search: '', startDate: '2021-01-01', });
+        // Clear Current Graph and selection info
+        // eslint-disable-next-line array-callback-return
+        Object.keys(selected).map(key => {
+            setSelected({ symbol: key });
+            clearGraphInfo(key);
+        });
     };
 
     /**
@@ -124,12 +137,11 @@ export default function Filters() {
 
     return (
         <div className='App-stocks' role='document'>
-            <h2 className='App-stocks-title'>Select up to 3 stocks to check it's Time Series (Scroll to see more)</h2>
+            {marketInfo
+                ? <div className='App-stocks-selection'>
+                    <h2 className='App-stocks-title'>Select up to 3 stocks to check it's Time Series (Scroll to see more)</h2>
 
-            {loading
-                ? <div>Loading Stocks Information...</div>
-                : <div className='App-stocks-selection'>
-                    <div className='stocks-selection'>
+                    <div className='stocks-selection' role='list'>
                         {marketInfo.length > 0
                             ? filters.search !== ''
                                 ? marketInfo
@@ -143,7 +155,7 @@ export default function Filters() {
                     <div className='date-selection'>
                         <label className='date-label' htmlFor="start">
                             Search Stock:
-                            <input id='search' onChange={handleSearchChange} type="search" value={filters.search}/>
+                            <input id='search' onChange={handleSearchChange} placeholder='Search by Symbol or Company' type="search" value={filters.search}/>
                         </label>
 
                         <label className='date-label' htmlFor="start">
@@ -155,8 +167,13 @@ export default function Filters() {
                             End Date:
                             <input id='end' onChange={handleEndDateChange} type="date" value={filters.endDate}/>
                         </label>
+
+                        <label className='date-label' htmlFor="end">
+                            <input id='clear' onClick={handleClear} type="button" value='Clear Filters'/>
+                        </label>
                     </div>
                 </div>
+                : <div>Loading Stocks Information...</div>
             }
         </div>
     );

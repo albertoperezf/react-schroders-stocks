@@ -8,7 +8,5 @@ import App from './App';
 describe('App Component', () => {
   test('renders without crashing', () => {
     render(<App />);
-
-    screen.debug();
   });
 });

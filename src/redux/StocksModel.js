@@ -5,7 +5,7 @@ import { action, thunk } from "easy-peasy";
 import { GetCompanyCandle } from "../services/stocksAPI";
 
 const StocksModel = {
-    marketInfo: [],
+    marketInfo: null,
     filters: {
         endDate: '2021-01-31',
         search: '',

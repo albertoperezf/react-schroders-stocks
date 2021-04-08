@@ -20,7 +20,7 @@ describe('Stock Component', () => {
 
     test('renders the Stock component', () => {
         render(renderStock(false, false));
-        expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByRole('listitem')).toBeInTheDocument();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).not.toBeChecked();
@@ -30,7 +30,7 @@ describe('Stock Component', () => {
 
     test('renders the Stock component disabled', () => {
         render(renderStock(true, false));
-        expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByRole('listitem')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeDisabled();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('Stock Component', () => {
 
     test('renders the Stock component when is selected', () => {
         render(renderStock(false, true));
-        expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByRole('listitem')).toBeInTheDocument();
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeChecked();
