@@ -24,6 +24,8 @@ describe('Stock Component', () => {
         expect(screen.getByRole('paragraph')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).toBeInTheDocument();
         expect(screen.getByRole('checkbox')).not.toBeChecked();
+        fireEvent.click(screen.getByRole('checkbox'), { target: { checked: true } });
+        expect(mockFn).toHaveBeenCalledTimes(1);
         fireEvent.change(screen.getByRole('checkbox'), { target: { checked: true } });
         expect(screen.getByRole('checkbox')).toBeChecked();
     });
