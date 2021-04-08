@@ -12,7 +12,8 @@ const store = createStore(Stores);
 describe('Graph Component', () => {
     test('renders without crashing', async () => {
         render(<StoreProvider store={store}><Graph /></StoreProvider>);
-        //
-        // screen.debug();
+
+        expect(screen.getByRole('document')).toBeInTheDocument();
+        expect(screen.getByText(/Select a Stock to display the Graph/)).toBeInTheDocument();
     });
 });

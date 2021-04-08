@@ -24,7 +24,7 @@ export default function Graph() {
 
     return loading
         ? 'Loading Stock Graph...'
-        : <div className="App-graph">
+        : <div className="App-graph" role='document'>
             {hasSelected.length === 0
                 ? <p>Select a Stock to display the Graph</p>
                 : <p>Currently Selected: {hasSelected.toString()}</p>
