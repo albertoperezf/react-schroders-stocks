@@ -18,6 +18,7 @@ export default function Graph() {
 
     const handleLegendClick = e => {
         const parse = e.dataKey.trim();
+
         setLegendFilters({ ...legendFilters, [parse]: !legendFilters[parse] })
     };
 

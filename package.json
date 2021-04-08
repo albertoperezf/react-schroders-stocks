@@ -19,7 +19,11 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
-    "src/**/*.{js}": [ "eslint" ]
+    "src/**/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
+    "src/**/**/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
+    "src/**/*.{js}": [ "eslint" ],
+    "src/**/**/*.{js}": [ "eslint" ],
+    "src/**/**/**/*.{js}": [ "eslint" ]
   },
   "scripts": {
     "start": "react-scripts start",
