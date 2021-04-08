@@ -18,18 +18,15 @@
     "web-vitals": "^1.0.1"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
-    "src/**/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
-    "src/**/**/**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
-    "src/**/*.{js}": [ "eslint" ],
-    "src/**/**/*.{js}": [ "eslint" ],
-    "src/**/**/**/*.{js}": [ "eslint" ]
+    "**/*.{js,jsx,json,css,scss,md}": [ "prettier --write" ],
+    "**/*.{js}": [ "eslint" ]
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -39,7 +36,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run lint"
     }
   },
   "browserslist": {
