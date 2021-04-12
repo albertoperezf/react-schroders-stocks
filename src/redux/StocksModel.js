@@ -2,9 +2,10 @@
 import { action, thunk } from "easy-peasy";
 
 // API calls
-import { GetCompanyCandle } from "../services/stocksAPI";
+import { GetCompanyCandle, GetCompanyProfile } from "../services/stocksAPI";
 
 const StocksModel = {
+    companyInfo: null,
     marketInfo: null,
     filters: {
         endDate: '2021-01-31',
@@ -39,6 +40,8 @@ const StocksModel = {
 
         actions.HandleSetGraphInfo({ symbol, candle });
     }),
+
+    // GRAPH HANDLERS
     HandleSetGraphInfo: action((state, value) => {
         const { symbol, candle } = value;
         const transformData = data => {
@@ -59,7 +62,25 @@ const StocksModel = {
     }),
     HandleClearGraphInfo: action((state, value) => {
         delete state.graphInfo[value];
-    })
+    }),
+
+    // COMPANY INFO HANDLERS
+    HandleLoadCompanyInfo: thunk(async (actions, payload, { getState }) => {
+        const profile = await GetCompanyProfile(payload);
+
+        console.log('Profile: ', profile); // TODO: REMOVE CONSOLE
+
+        actions.HandleSetGraphInfo({ ...profile, symbol: payload });
+    }),
+    HandleSetCompanyInfo: action((state, value) => {
+        const { symbol } = value;
+
+        if (state.companyInfo[symbol]) {
+            delete state.companyInfo[symbol];
+        } else {
+            state.companyInfo[symbol] = value;
+        }
+    }),
 }
 
 

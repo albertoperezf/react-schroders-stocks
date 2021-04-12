@@ -2,10 +2,12 @@
 import { createStore, StoreProvider } from "easy-peasy";
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Stores from "../../redux/Stores";
 
 // Components
 import Filters from "./Filters";
+
+// State Management
+import Stores from "../../redux/Stores";
 
 const store = createStore(Stores);
 

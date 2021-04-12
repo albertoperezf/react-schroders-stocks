@@ -39,3 +39,15 @@ export function GetCompanyCandle(company, start, end) {
 
     return APIFetch(endpoint);
 }
+
+/**
+ * Get the Company Profile from Finnhub
+ * @param company - Symbol of the company that we want information from
+ * @return {Promise<Response>}
+ * @constructor
+ */
+export function GetCompanyProfile(company) {
+    const endpoint = `https://finnhub.io/api/v1/stock/profile?symbol=${company}&token=${ACCESS_TOKEN}`;
+
+    return APIFetch(endpoint);
+}

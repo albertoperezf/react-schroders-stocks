@@ -3,7 +3,6 @@ import { useStoreState } from 'easy-peasy';
 import React, { useState } from "react";
 import { CartesianGrid, Legend, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
-
 /**
  * Graph - Component to show the time series for the selected stocks
  * @return {*}

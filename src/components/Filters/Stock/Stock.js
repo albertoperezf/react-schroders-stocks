@@ -1,6 +1,7 @@
 // Dependencies
 import PropTypes from 'prop-types';
 import React from "react";
+import { Link } from 'react-router-dom';
 
 /**
  * Stock - Item to show info about a single Stock
@@ -19,7 +20,9 @@ export default function Stock({ data, disabled, onChange, isSelected }) {
     };
 
     return <div role='listitem' className='stock-details' key={data.symbol}>
-        <p role='paragraph' title={data.description}>{data.symbol}</p>
+        <Link title={data.description} to={`/company/${data.symbol}`}>
+            <p role='paragraph' >{data.symbol}</p>
+        </Link>
 
         <input disabled={disabled} id='select' checked={isSelected} onChange={handleChange} type="checkbox" value={isSelected} />
     </div>;
