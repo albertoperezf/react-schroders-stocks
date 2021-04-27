@@ -1,5 +1,7 @@
 // Dependencies
+import { createMemoryHistory } from 'history';
 import React from 'react';
+import { Router } from 'react-router-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 // Components
@@ -16,7 +18,10 @@ describe('Stock Component', () => {
         type: "Common Stock",
     };
     const mockFn = jest.fn();
-    const renderStock = (disabled, isSelected) => <Stock data={mockData} disabled={disabled} onChange={mockFn} isSelected={isSelected} />;
+    const history = createMemoryHistory();
+    const renderStock = (disabled, isSelected) => <Router history={history}>
+        <Stock data={mockData} disabled={disabled} onChange={mockFn} isSelected={isSelected} />
+    </Router>;
 
     test('renders the Stock component', () => {
         render(renderStock(false, false));

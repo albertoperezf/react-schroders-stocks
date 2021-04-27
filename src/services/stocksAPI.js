@@ -47,7 +47,7 @@ export function GetCompanyCandle(company, start, end) {
  * @constructor
  */
 export function GetCompanyProfile(company) {
-    const endpoint = `https://finnhub.io/api/v1/stock/profile?symbol=${company}&token=${ACCESS_TOKEN}`;
+    const endpoint = `https://finnhub.io/api/v1/stock/profile2?symbol=${company}&token=${ACCESS_TOKEN}`;
 
     return APIFetch(endpoint);
 }

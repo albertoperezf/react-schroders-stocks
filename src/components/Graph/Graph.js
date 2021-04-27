@@ -3,6 +3,9 @@ import { useStoreState } from 'easy-peasy';
 import React, { useState } from "react";
 import { CartesianGrid, Legend, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
+// Styles
+import './Graph.css';
+
 /**
  * Graph - Component to show the time series for the selected stocks
  * @return {*}
@@ -22,7 +25,7 @@ export default function Graph() {
 
     return loading
         ? 'Loading Stock Graph...'
-        : <div className="App-graph" role='document'>
+        : <div className="graph" role='document'>
             {hasSelected.length === 0
                 ? <p>Select a Stock to display the Graph</p>
                 : <p>Currently Selected: {hasSelected.toString()}</p>
@@ -44,17 +47,17 @@ export default function Graph() {
                         return <Line key={`${key}-open`} data={graphInfo[key]} type="monotone" dataKey={`open${legendFilters.open ? '' : ' '}`} stroke="blue" dot={false} />;
                     })}
 
-                    {hasSelected.map(key => {
-                        return <Line key={`${key}-close`} data={graphInfo[key]} type="monotone" dataKey={`close${legendFilters.close ? '' : ' '}`} stroke="gray" dot={false} />;
-                    })}
+                    {/*{hasSelected.map(key => {*/}
+                    {/*    return <Line key={`${key}-close`} data={graphInfo[key]} type="monotone" dataKey={`close${legendFilters.close ? '' : ' '}`} stroke="gray" dot={false} />;*/}
+                    {/*})}*/}
 
-                    {hasSelected.map(key => {
-                        return <Line key={`${key}-high`} data={graphInfo[key]} type="monotone" dataKey={`high${legendFilters.high ? '' : ' '}`} stroke="red" dot={false} />;
-                    })}
+                    {/*{hasSelected.map(key => {*/}
+                    {/*    return <Line key={`${key}-high`} data={graphInfo[key]} type="monotone" dataKey={`high${legendFilters.high ? '' : ' '}`} stroke="red" dot={false} />;*/}
+                    {/*})}*/}
 
-                    {hasSelected.map(key => {
-                        return <Line key={`${key}-low`} data={graphInfo[key]} type="monotone" dataKey={`low${legendFilters.low ? '' : ' '}`} stroke="green" dot={false} />;
-                    })}
+                    {/*{hasSelected.map(key => {*/}
+                    {/*    return <Line key={`${key}-low`} data={graphInfo[key]} type="monotone" dataKey={`low${legendFilters.low ? '' : ' '}`} stroke="green" dot={false} />;*/}
+                    {/*})}*/}
                 </LineChart>
             }
         </div>;

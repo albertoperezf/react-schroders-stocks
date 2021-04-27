@@ -66,19 +66,25 @@ const StocksModel = {
 
     // COMPANY INFO HANDLERS
     HandleLoadCompanyInfo: thunk(async (actions, payload, { getState }) => {
+        actions.HandleSetLoading(true);
+
         const profile = await GetCompanyProfile(payload);
 
-        console.log('Profile: ', profile); // TODO: REMOVE CONSOLE
+        actions.HandleSetLoading(false);
 
-        actions.HandleSetGraphInfo({ ...profile, symbol: payload });
+        actions.HandleSetCompanyInfo({ ...profile, symbol: payload });
     }),
     HandleSetCompanyInfo: action((state, value) => {
         const { symbol } = value;
 
-        if (state.companyInfo[symbol]) {
-            delete state.companyInfo[symbol];
+        if (state.companyInfo === null) {
+            state.companyInfo = { [symbol]: value };
         } else {
-            state.companyInfo[symbol] = value;
+            if (state.companyInfo[symbol]) {
+                delete state.companyInfo[symbol];
+            } else {
+                state.companyInfo[symbol] = value;
+            }
         }
     }),
 }

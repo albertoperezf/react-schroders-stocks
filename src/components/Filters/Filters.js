@@ -8,6 +8,9 @@ import Stock from "./Stock/Stock";
 // Utilities
 import { GetStocksUSDetails } from "../../services/stocksAPI";
 
+// Styles
+import './Filters.css';
+
 /**
  * Filters - Manage the filtering part of the Stock App
  * @return {*}
@@ -136,12 +139,10 @@ export default function Filters() {
     };
 
     return (
-        <div className='App-stocks' role='document'>
+        <div className='filters' role='document'>
             {marketInfo
-                ? <div className='App-stocks-selection'>
-                    <h2 className='App-stocks-title'>Select up to 3 stocks to check it's Time Series (Scroll to see more)</h2>
-
-                    <div className='stocks-selection' role='list'>
+                ? <div className='filters-container'>
+                    <div className='filters-list' role='list'>
                         {marketInfo.length > 0
                             ? filters.search !== ''
                                 ? marketInfo
@@ -152,23 +153,23 @@ export default function Filters() {
                         }
                     </div>
 
-                    <div className='date-selection'>
-                        <label className='date-label' htmlFor="start">
+                    <div className='filters-date'>
+                        <label className='filters-input' htmlFor="search">
                             Search Stock:
                             <input id='search' onChange={handleSearchChange} placeholder='by Symbol or Company' type="search" value={filters.search}/>
                         </label>
 
-                        <label className='date-label' htmlFor="start">
+                        <label className='filters-input' htmlFor="start">
                             Start Date:
                             <input id='start' onChange={handleStartDateChange} type="date" value={filters.startDate}/>
                         </label>
 
-                        <label className='date-label' htmlFor="end">
+                        <label className='filters-input' htmlFor="end">
                             End Date:
                             <input id='end' onChange={handleEndDateChange} type="date" value={filters.endDate}/>
                         </label>
 
-                        <label className='date-label' htmlFor="end">
+                        <label className='filters-input' htmlFor="clear">
                             <input id='clear' onClick={handleClear} type="button" value='Clear Filters'/>
                         </label>
                     </div>

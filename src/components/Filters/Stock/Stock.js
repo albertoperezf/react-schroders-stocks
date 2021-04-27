@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import React from "react";
 import { Link } from 'react-router-dom';
 
+// Styles
+import './Stock.css';
+
 /**
  * Stock - Item to show info about a single Stock
  * @param {Object} data - Data of the company to filter

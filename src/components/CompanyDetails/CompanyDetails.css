@@ -1,0 +1,31 @@
+.company input {
+    margin: 1em;
+}
+
+.company-details,
+.company-details-left,
+.company-details-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-details-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.company-details-left {
+    width: 50%;
+}
+
+.company-details-right {
+    width: 50%;
+}
+
+.company-details-right img {
+    height: 8em;
+    width: 8em;
+}

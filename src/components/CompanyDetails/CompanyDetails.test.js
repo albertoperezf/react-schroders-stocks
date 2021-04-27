@@ -1,6 +1,8 @@
 // Dependencies
 import { createStore, StoreProvider } from "easy-peasy";
+import { createMemoryHistory } from 'history';
 import React from 'react';
+import { Router } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 
 // Components
@@ -13,9 +15,16 @@ const store = createStore(Stores);
 
 describe('App Component', () => {
     test('renders without crashing', () => {
-        render(<StoreProvider store={store}><CompanyDetails /></StoreProvider>);
+        const history = createMemoryHistory();
+
+        render(<StoreProvider store={store}>
+            <Router history={history}>
+                <CompanyDetails />
+            </Router>
+        </StoreProvider>);
 
         screen.debug();
+
         // expect(screen.getAllByRole('document')).toHaveLength(2);
     });
 });

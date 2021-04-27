@@ -23,7 +23,7 @@ function App() {
     return (
         <StoreProvider store={createStore(Stores)}>
             <Router>
-                <div className="App">
+                <div className="app">
                     <Header/>
 
                     <Switch>
